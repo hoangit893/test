@@ -1,29 +1,30 @@
 import { Checkbox } from "@mui/material";
 import React, { useState } from "react";
 import trash from "../../assets/trash.svg";
-function ToDo({ task, deleteToDo, setIsCompleted }) {
+function ToDo({ task, deleteToDo, onCompleted }) {
   const [isComplete, setIsComplete] = useState(task.isComplelted);
 
   const handleDelete = ({ id }) => {
     deleteToDo(id);
   };
 
-  const handleCompleted = (task) => {
-    setIsCompleted(task);
+  const handleCheckBox = () => {
+    let id = task.id;
+    onCompleted(id);
     setIsComplete(!isComplete);
   };
 
   return (
     <div
       style={{
-        display: task.isHidden ? "hidden" : "flex",
+        display: task.isHidden ? "none" : "flex",
         alignItems: "center",
         width: "40vh",
       }}
       className="todo">
       <Checkbox
         checked={isComplete}
-        onClick={() => handleCompleted()}></Checkbox>
+        onClick={() => handleCheckBox()}></Checkbox>
       <span
         style={{
           textDecoration: isComplete ? "line-through" : null,

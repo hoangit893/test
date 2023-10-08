@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 
 function NavBar({ onClick }) {
+  const [isSelecteced, setIsSelected] = useState("all");
+
   return (
     <div
       style={{
@@ -21,7 +23,7 @@ function NavBar({ onClick }) {
       <button value="active" onClick={onClick}>
         Active
       </button>
-      <button className="button-active" value="completed" onClick={onClick}>
+      <button value="completed" onClick={onClick}>
         Completed
       </button>
     </div>

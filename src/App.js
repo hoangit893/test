@@ -8,16 +8,19 @@ function App() {
   const [taskList, setTaskList] = useState([]);
   const [filter, setFilter] = useState("all");
 
-  const setIsCompleted = ({ id }) => {
+  const setIsCompleted = (id) => {
     setTaskList((prev) => {
       prev.map((task) => {
         if (task.id === id) {
-          task.isComplelted = true;
+          if (task.isComplelted === true) {
+            task.isComplelted = false;
+          } else task.isComplelted = true;
         }
         return task;
       });
       return prev;
     });
+    console.log(taskList[id]);
   };
 
   const addToDo = (value) => {
@@ -36,7 +39,7 @@ function App() {
     if (filter === "active") {
       setTaskList((prev) => {
         return prev.map((task) => {
-          task.isHidden = task.isComplelted ? false : true;
+          task.isHidden = task.isComplelted ? true : false;
           return task;
         });
       });
@@ -44,7 +47,7 @@ function App() {
     if (filter === "completed") {
       setTaskList((prev) => {
         return prev.map((task) => {
-          task.isHidden = task.isComplelted ? true : false;
+          task.isHidden = task.isComplelted ? false : true;
           return task;
         });
       });
@@ -71,15 +74,22 @@ function App() {
 
   return (
     <div className="App">
+      <div
+        id="logo"
+        style={{
+          fontSize: 60,
+          fontWeight: "bold",
+        }}>
+        #TODO
+      </div>
       <NavBar onClick={handleFilter}></NavBar>
       <InputBar addToDo={addToDo}></InputBar>
 
       {taskList.map((task) => (
         <ToDo
           key={task.id}
-          isComplelted={task.isComplelted}
           task={task}
-          onCompleted={(task) => setIsCompleted(task)}
+          onCompleted={setIsCompleted}
           deleteToDo={deleteToDo}></ToDo>
       ))}
     </div>
