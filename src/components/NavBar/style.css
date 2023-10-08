@@ -1,0 +1,8 @@
+button {
+  background-color: transparent;
+  border: transparent;
+}
+
+.button-active {
+  border-bottom: 3px solid #11999e;
+}
