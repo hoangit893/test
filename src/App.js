@@ -36,7 +36,7 @@ function App() {
   };
 
   const handleDispayList = (filter) => {
-    if (filter === "active") {
+    if (filter === "Active") {
       setTaskList((prev) => {
         return prev.map((task) => {
           task.isHidden = task.isComplelted ? true : false;
@@ -44,7 +44,7 @@ function App() {
         });
       });
     }
-    if (filter === "completed") {
+    if (filter === "Completed") {
       setTaskList((prev) => {
         return prev.map((task) => {
           task.isHidden = task.isComplelted ? false : true;
@@ -52,7 +52,7 @@ function App() {
         });
       });
     }
-    if (filter === "all") {
+    if (filter === "All") {
       setTaskList((prev) => {
         return prev.map((task) => {
           task.isHidden = false;
@@ -69,7 +69,6 @@ function App() {
 
   useEffect(() => {
     handleDispayList(filter);
-    console.log(taskList);
   }, [filter]);
 
   return (

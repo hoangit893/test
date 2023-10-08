@@ -1,8 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 
 function NavBar({ onClick }) {
-  const [isSelecteced, setIsSelected] = useState("all");
+  const [menuList, setMenuList] = useState([
+    { label: "All", isSelected: true },
+    { label: "Active", isSelected: false },
+    { label: "Completed", isSelected: false },
+  ]);
+
+  const handleClick = ({ target }) => {
+    let clicked = target.value;
+    setMenuList((prev) => {
+      prev.map((menu) => {
+        if (menu.label === clicked) {
+          menu.isSelected = true;
+        } else menu.isSelected = false;
+        return menu;
+      });
+      return prev;
+    });
+  };
+
+  useEffect(() => {
+    let buttons = document.getElementsByClassName("button");
+  }, [menuList]);
 
   return (
     <div
@@ -17,15 +38,14 @@ function NavBar({ onClick }) {
         paddingBottom: 0,
       }}
       className="navbar">
-      <button value="all" onClick={onClick}>
-        All
-      </button>
-      <button value="active" onClick={onClick}>
-        Active
-      </button>
-      <button value="completed" onClick={onClick}>
-        Completed
-      </button>
+      {menuList.map((menu) => (
+        <button
+          className={menu.isSelected ? "button button-active" : "button"}
+          value={menu.label}
+          onClick={handleClick}>
+          {menu.label}
+        </button>
+      ))}
     </div>
   );
 }

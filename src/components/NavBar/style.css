@@ -1,6 +1,9 @@
-.navbar button {
+button {
   background-color: transparent;
   border: transparent;
+}
+
+.navbar button {
   padding: 10px 30px;
 }
 
